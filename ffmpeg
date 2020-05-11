@@ -1,0 +1,10 @@
+To join images into a singe video 
+Note: images are in the format 
+im_1.jpg
+im_2.jpg
+im_3.jpg
+im_4.jpg
+...
+...
+
+ffmpeg -f image2 -r 25 -i im_%d.jpg  -b 4M -y out.mp4 -vcodec libx264 -pass 2
