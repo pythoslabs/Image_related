@@ -9,12 +9,10 @@ from PIL import Image
 
 DIR = '../data/eval_all/'
 
-try:
-  for filename in os.listdir(DIR):
+for filename in os.listdir(DIR):
+  try:
     img = Image.open(DIR+filename)
     img.verify()
-except : # e1 as Exception :
-  #print("Exception:" + str(e1)) 
-  print(filename)
-
-
+  except  Exception as e1 :
+    print("Exception:" + str(e1)) 
+    print(filename)
