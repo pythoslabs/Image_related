@@ -1,18 +1,28 @@
-#Created : 27 Mar 2022 
+# Created : 2 Jan 2022 
+#  v 1.3
 # This tries to read all the images in a dir 
-# and gives an error when it is not able to open ( mostly because its corrupted while downloading )
+# moves the corrupted files into an ERROR dir  
 
-# To do : Display the error / exception type / message 
 
 import os
 from PIL import Image
+import shutil  # To move the error file 
 
-DIR = '../data/eval_all/'
+DIR = '../data/'
+ERROR_DIR = '../ERROR_IMG/'
 
 for filename in os.listdir(DIR):
+    
   try:
     img = Image.open(DIR+filename)
     img.verify()
   except  Exception as e1 :
     print("Exception:" + str(e1)) 
-    print(filename)
+    # move this file to an error directory 
+    # create the directory if it does not exist
+    if not os.path.isdir(f'{ERROR_DIR}'):
+        print(f'creating ... {ERROR_DIR}')
+        os.mkdir(f'{ERROR_DIR}')
+    print(f'Mmoving file ...{filename} to {ERROR_DIR}')    
+    shutil.move(DIR+filename,ERROR_DIR+filename)
+
